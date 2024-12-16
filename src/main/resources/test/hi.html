@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>타임리프 테스트 페이지</title>
+</head>
+<!-- header.html 포함하기 -->
+<div th:replace="~{layouts/header}"></div>
+<body>
+<p th:text="${hello} + ' 반갑다!!'"> </p>
+</body>
+</html>
