@@ -1,0 +1,7 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false  # 개발 중이라면 캐시를 비활성화하는 것이 좋습니다

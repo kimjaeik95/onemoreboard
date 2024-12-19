@@ -9,7 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form action="#" method="post" xmlns:th="http://www.w3.org/1999/xhtml">
+<form method="post" th:action="@{/articles/create}" th:object="${articleRequest}">
     <div class="mb-3">
         <label class="form-label">제목</label>
         <input type="text" class="form-control" th:field="*{title}" />
