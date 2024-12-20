@@ -4,13 +4,11 @@ import com.example.onemoreboard.dto.ArticleRequest;
 import com.example.onemoreboard.entity.Article;
 import com.example.onemoreboard.service.ArticleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
 
 /**
  * packageName    : com.example.onemoreboard.controller
@@ -25,23 +23,30 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/api/articles")
+@Slf4j
 public class ArticleController {
 
     private final ArticleService articleService;
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("articleRequest", new ArticleRequest());
+        return "articles/writing";
+    }
 
-
-    @PostMapping("/articles/create")
+    @PostMapping("/create")
     public String createArticle(@ModelAttribute ArticleRequest articleRequest) {
-        System.out.println("Title: " + articleRequest.getTitle());
-        System.out.println("Content: " + articleRequest.getContent());
+        log.info(articleRequest.getTitle());
+        log.info(articleRequest.getContent());
         articleService.createArticle(articleRequest);
         return "redirect:/articles/create";
     }
 
-    @GetMapping("/articles/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("articleRequest", new ArticleRequest());
-        return "articles/writing";
+    @GetMapping("/find/{id}")
+    public String getArticle(@PathVariable("id") Long id, Model model) {
+        Article article = articleService.findArticleById(id);
+        model.addAttribute("article", article);
+        return "articles/show";
     }
 }
 

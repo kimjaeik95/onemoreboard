@@ -28,4 +28,8 @@ public class ArticleService {
         articleRepository.save(article);
 
     }
+
+    public Article findArticleById(Long id) {
+        return articleRepository.findById(id).orElse(null);
+    }
 }
