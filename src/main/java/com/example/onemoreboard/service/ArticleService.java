@@ -6,6 +6,8 @@ import com.example.onemoreboard.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * packageName    : com.example.onemoreboard.service
  * fileName       : ArticleService
@@ -31,5 +33,9 @@ public class ArticleService {
 
     public Article findArticleById(Long id) {
         return articleRepository.findById(id).orElse(null);
+    }
+
+    public List<Article> findArticles() {
+        return articleRepository.findAll();
     }
 }

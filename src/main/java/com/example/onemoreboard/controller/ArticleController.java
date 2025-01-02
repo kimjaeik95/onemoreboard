@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * packageName    : com.example.onemoreboard.controller
@@ -47,6 +49,13 @@ public class ArticleController {
         Article article = articleService.findArticleById(id);
         model.addAttribute("article", article);
         return "articles/show";
+    }
+
+    @GetMapping("/finds")
+    public String getArticles(Model model) {
+        List<Article> articleList = articleService.findArticles();
+        model.addAttribute("articles", articleList);
+        return "articles/index";
     }
 }
 
