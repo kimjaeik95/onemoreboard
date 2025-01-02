@@ -47,7 +47,7 @@
 <div class="container">
     <div class="form-container">
         <h3 class="text-center mb-4">글 작성</h3>
-        <form method="post" th:action="@{/articles/create}" th:object="${articleRequest}">
+        <form method="post" th:action="@{/api/articles/create}" th:object="${articleRequest}">
             <div class="mb-3">
                 <label class="form-label">제목</label>
                 <input type="text" class="form-control" th:field="*{title}" placeholder="제목을 입력하세요" required />
@@ -57,6 +57,7 @@
                 <textarea class="form-control" rows="5" th:field="*{content}" placeholder="내용을 입력하세요" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary w-100">글 작성하기</button>
+            <a href="/api/articles/finds">뒤로가기</a>
         </form>
     </div>
 </div>

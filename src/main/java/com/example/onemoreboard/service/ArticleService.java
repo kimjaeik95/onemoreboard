@@ -25,10 +25,10 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    public void createArticle(ArticleRequest articleRequest) {
+    public Article createArticle(ArticleRequest articleRequest) {
         Article article = articleRequest.toEntity();
         articleRepository.save(article);
-
+        return article;
     }
 
     public Article findArticleById(Long id) {

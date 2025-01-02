@@ -40,8 +40,8 @@ public class ArticleController {
     public String createArticle(@ModelAttribute ArticleRequest articleRequest) {
         log.info(articleRequest.getTitle());
         log.info(articleRequest.getContent());
-        articleService.createArticle(articleRequest);
-        return "redirect:/articles/create";
+        Article article = articleService.createArticle(articleRequest);
+        return "redirect:/api/articles/find/" + article.getId();
     }
 
     @GetMapping("/find/{id}")
