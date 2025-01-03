@@ -20,11 +20,13 @@ import lombok.*;
 @Builder
 @Setter
 public class ArticleRequest {
+    private Long id;
     private String title;
     private String content;
 
     public Article toEntity() {
         return Article.builder()
+                .id(this.id)
                 .title(this.title)
                 .content(this.content)
                 .build();

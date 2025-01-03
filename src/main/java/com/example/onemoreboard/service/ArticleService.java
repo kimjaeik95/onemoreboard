@@ -41,8 +41,18 @@ public class ArticleService {
     }
 
 
-    public ArticleResponse updateArticle(Long id) {
+    public ArticleResponse updateShowArticle(Long id) {
       Article article = articleRepository.findById(id).orElse(null);
       return ArticleResponse.fromEntity(article);
+    }
+
+
+    public void updateArticle(ArticleRequest articleRequest) {
+        Article article = articleRequest.toEntity();
+        Article existingArticle = articleRepository.findById(article.getId()).orElse(null);
+
+        if (existingArticle != null) {
+            articleRepository.save(article);
+        }
     }
 }

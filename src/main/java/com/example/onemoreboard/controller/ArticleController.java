@@ -61,10 +61,15 @@ public class ArticleController {
 
     @GetMapping("/{id}/edit")
     public String getEditPage(@PathVariable("id") Long id, Model model) {
-        ArticleResponse response = articleService.updateArticle(id);
+        ArticleResponse response = articleService.updateShowArticle(id);
         model.addAttribute("article",response);
         return "articles/edit";
+    }
 
+    @PostMapping("/update")
+    public String updateEdit(ArticleRequest articleRequest) {
+        articleService.updateArticle(articleRequest);
+        return "redirect:/api/articles/find/" + articleRequest.getId();
     }
 }
 
