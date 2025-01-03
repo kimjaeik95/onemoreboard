@@ -1,6 +1,7 @@
 package com.example.onemoreboard.service;
 
 import com.example.onemoreboard.dto.ArticleRequest;
+import com.example.onemoreboard.dto.ArticleResponse;
 import com.example.onemoreboard.entity.Article;
 import com.example.onemoreboard.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,11 @@ public class ArticleService {
 
     public List<Article> findArticles() {
         return articleRepository.findAll();
+    }
+
+
+    public ArticleResponse updateArticle(Long id) {
+      Article article = articleRepository.findById(id).orElse(null);
+      return ArticleResponse.fromEntity(article);
     }
 }

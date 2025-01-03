@@ -26,7 +26,7 @@ public class ArticleResponse {
     private String title;
     private String content;
 
-    public ArticleResponse fromEntity(Article article) {
+    public static ArticleResponse fromEntity(Article article) {
         return ArticleResponse.builder()
                 .id(article.getId())
                 .title(article.getTitle())

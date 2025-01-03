@@ -1,6 +1,7 @@
 package com.example.onemoreboard.controller;
 
 import com.example.onemoreboard.dto.ArticleRequest;
+import com.example.onemoreboard.dto.ArticleResponse;
 import com.example.onemoreboard.entity.Article;
 import com.example.onemoreboard.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,14 @@ public class ArticleController {
         List<Article> articleList = articleService.findArticles();
         model.addAttribute("articles", articleList);
         return "articles/index";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String getEditPage(@PathVariable("id") Long id, Model model) {
+        ArticleResponse response = articleService.updateArticle(id);
+        model.addAttribute("article",response);
+        return "articles/edit";
+
     }
 }
 
