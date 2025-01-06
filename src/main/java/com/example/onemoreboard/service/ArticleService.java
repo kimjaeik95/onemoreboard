@@ -48,11 +48,14 @@ public class ArticleService {
 
 
     public void updateArticle(ArticleRequest articleRequest) {
-        Article article = articleRequest.toEntity();
-        Article existingArticle = articleRepository.findById(article.getId()).orElse(null);
-
+        Article existingArticle = articleRepository.findById(articleRequest.getId()).orElse(null);
+        Article article = articleRequest.updateEntity(articleRequest.getTitle(), articleRequest.getContent());
         if (existingArticle != null) {
             articleRepository.save(article);
         }
+    }
+
+    public void deleteArticleById(Long id) {
+        articleRepository.deleteById(id);
     }
 }

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -70,6 +71,14 @@ public class ArticleController {
     public String updateEdit(ArticleRequest articleRequest) {
         articleService.updateArticle(articleRequest);
         return "redirect:/api/articles/find/" + articleRequest.getId();
+    }
+
+    // html post, get 메서드만 받을 수 있음
+    @GetMapping("/{id}/delete")
+    public String deleteArticle(@PathVariable("id")Long id, RedirectAttributes rttr) {
+        articleService.deleteArticleById(id);
+        rttr.addFlashAttribute("msg", "삭제됐습니다.");
+        return "redirect:/api/articles/finds";
     }
 }
 

@@ -31,4 +31,12 @@ public class ArticleRequest {
                 .content(this.content)
                 .build();
     }
+
+    public Article updateEntity(String title, String content) {
+        return Article.builder()
+                .id(this.id)
+                .title(title)
+                .content(content)
+                .build();
+    }
 }
