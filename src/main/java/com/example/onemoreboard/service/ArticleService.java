@@ -47,15 +47,17 @@ public class ArticleService {
     }
 
 
-    public void updateArticle(ArticleRequest articleRequest) {
+    public Article updateArticle(ArticleRequest articleRequest) {
         Article existingArticle = articleRepository.findById(articleRequest.getId()).orElse(null);
         Article article = articleRequest.updateEntity(articleRequest.getTitle(), articleRequest.getContent());
         if (existingArticle != null) {
             articleRepository.save(article);
         }
+        return existingArticle;
     }
 
     public void deleteArticleById(Long id) {
         articleRepository.deleteById(id);
+        }
     }
-}
+
