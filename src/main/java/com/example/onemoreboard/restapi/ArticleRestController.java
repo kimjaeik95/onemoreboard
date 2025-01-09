@@ -1,6 +1,7 @@
 package com.example.onemoreboard.restapi;
 
 import com.example.onemoreboard.dto.ArticleRequest;
+import com.example.onemoreboard.dto.ArticleResponse;
 import com.example.onemoreboard.entity.Article;
 import com.example.onemoreboard.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +42,10 @@ public class ArticleRestController {
         return articleService.createArticle(articleRequest);
     }
 
-    @PutMapping("/articles/update/{id}")
-    public Article updateArticle(@PathVariable("id")Long id, @RequestBody ArticleRequest articleRequest) {
-        return articleService.updateArticle(articleRequest);
+    @PatchMapping("/articles/update/{id}")
+    public ResponseEntity<?> updateArticle(@PathVariable("id")Long id, @RequestBody ArticleRequest articleRequest) {
+         ArticleResponse articleResponse = articleService.restUpdateArticle(id, articleRequest);
+         return ResponseEntity.ok().body(articleResponse);
     }
 
     @DeleteMapping("/articles/delete/{id}")
@@ -51,5 +53,11 @@ public class ArticleRestController {
          articleService.deleteArticleById(id);
          return ResponseEntity.noContent().build();
 
+    }
+
+    @PostMapping("/articles/test")
+    public ResponseEntity<?> transactionTest(@RequestBody List<ArticleRequest> articleRequestList) throws IllegalAccessException {
+        articleService.test(articleRequestList);
+        return ResponseEntity.ok().build();
     }
 }

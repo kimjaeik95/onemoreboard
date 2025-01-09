@@ -29,6 +29,11 @@ public class Article {
     private Long id;
     private String title;
     private String content;
+
+    public void updateArticle(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
 
 
