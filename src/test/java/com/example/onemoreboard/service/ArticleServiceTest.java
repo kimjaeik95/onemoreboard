@@ -90,4 +90,19 @@ class ArticleServiceTest {
         assertEquals(articleRequest.getTitle(), updateArticleResponse.getTitle(), "제목이 일치하지 않습니다.");
         assertEquals(articleRequest.getContent(), updateArticleResponse.getContent(), "내용이 일치하지 않습니다.");
     }
+
+    @Test
+    void deleteArticleById() {
+        // Given
+        Article article = new Article(null,"취업","취업하자!");
+        articleRepository.save(article);
+
+        Long articleId = article.getId();
+
+        // When
+        articleRepository.deleteById(articleId);
+
+        // Then
+        assertTrue(articleRepository.findById(articleId).isEmpty());
+    }
 }
