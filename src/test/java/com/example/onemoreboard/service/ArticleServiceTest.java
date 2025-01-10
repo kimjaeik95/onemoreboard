@@ -37,6 +37,8 @@ class ArticleServiceTest {
         2. 실제 데이터 획득
         3. 예상 실제 데이터 비교 및 검증
          */
+
+        // Given
         List<Article> articleList = List.of(
                 new Article(null,"aaa","aaa"),
                 new Article(null,"bbb","bbb"),
@@ -44,15 +46,27 @@ class ArticleServiceTest {
         );
         articleRepository.saveAll(articleList);
 
+        // When
         List<Article> articles = articleService.findArticles();
 
+        // Then
         assertEquals(articleList.size(), articles.size(),"저장된 데이터와 조회된 데이터의 크기가 다릅니다.");
         for (int i = 0; i < articleList.size(); i++) {
             assertEquals(articleList.get(i).getTitle(), articles.get(i).getTitle(), "제목이 일치하지 않습니다.");
             assertEquals(articleList.get(i).getContent(), articles.get(i).getContent(), "내용이 일치하지 않습니다.");
         }
+    }
 
+    @Test
+    void createArticle() {
+        // Given
+        Article article = new Article(null,"aaa","bbb");
 
+        // When
+        Article saveArticle = articleRepository.save(article);
 
+        // Then
+        assertNotNull(saveArticle.getId());
+        assertEquals(article.getTitle(), saveArticle.getTitle(), "제목이 일치하지 않습니다.");
     }
 }
