@@ -1,5 +1,7 @@
 package com.example.onemoreboard.service;
 
+import com.example.onemoreboard.dto.ArticleRequest;
+import com.example.onemoreboard.dto.ArticleResponse;
 import com.example.onemoreboard.entity.Article;
 import com.example.onemoreboard.repository.ArticleRepository;
 import org.junit.jupiter.api.Test;
@@ -40,9 +42,9 @@ class ArticleServiceTest {
 
         // Given
         List<Article> articleList = List.of(
-                new Article(null,"aaa","aaa"),
-                new Article(null,"bbb","bbb"),
-                new Article(null,"ccc","ccc")
+                new Article(null,"제목1","오늘 너"),
+                new Article(null,"제목2","너무"),
+                new Article(null,"제목3","이쁘다")
         );
         articleRepository.saveAll(articleList);
 
@@ -60,13 +62,32 @@ class ArticleServiceTest {
     @Test
     void createArticle() {
         // Given
-        Article article = new Article(null,"aaa","bbb");
+        Article article = new Article(null,"제목","취업하자");
 
         // When
         Article saveArticle = articleRepository.save(article);
 
         // Then
         assertNotNull(saveArticle.getId());
+        assertEquals(article.toString(), saveArticle.toString());
         assertEquals(article.getTitle(), saveArticle.getTitle(), "제목이 일치하지 않습니다.");
+    }
+
+    @Test
+    void restUpdateArticle() {
+        // Given
+        Article article = new Article(null, "취업", "취업하자!!");
+        articleRepository.save(article);
+
+        Long articleId = article.getId();
+        ArticleRequest articleRequest = new ArticleRequest(null, "취업", "더 열심히 하자!!");
+
+        // When
+        ArticleResponse updateArticleResponse = articleService.restUpdateArticle(articleId, articleRequest);
+
+        // Then
+        assertNotNull(updateArticleResponse);
+        assertEquals(articleRequest.getTitle(), updateArticleResponse.getTitle(), "제목이 일치하지 않습니다.");
+        assertEquals(articleRequest.getContent(), updateArticleResponse.getContent(), "내용이 일치하지 않습니다.");
     }
 }
