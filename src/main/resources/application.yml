@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active:
+    active: test
 
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -16,6 +16,8 @@ spring:
       ddl-auto: none
     hibernate.format_sql: true #쿼리줄바꿈
 
+  flyway:
+    baseline-on-migrate: true
 logging:
   level:
     root: DEBUG
