@@ -1,5 +1,6 @@
 package com.example.onemoreboard.entity;
 
+import com.example.onemoreboard.dto.CommentRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,4 +45,28 @@ public class Comment {
         this.content = content;
         this.createAt = Instant.now();
     }
+
+    public Comment(Article article, String nickname, String content) {
+        this.article = article;
+        this.nickname = nickname;
+        this.content = content;
+        this.createAt = Instant.now();
+    }
+
+    // 생성자 방식
+    public static Comment createComment(CommentRequest commentRequest, Article article) {
+        return new Comment(
+                article,
+                commentRequest.getNickname(),
+                commentRequest.getContent()
+        );
+    }
+    // 빌더방식
+//    public static Comment create(CommentRequest commentRequest, Article article) {
+//        return Comment.builder()
+//                .article(article)
+//                .nickname(commentRequest.getNickname())
+//                .content(commentRequest.getContent())
+//                .build();
+//    }
 }

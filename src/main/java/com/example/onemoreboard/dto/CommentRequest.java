@@ -1,5 +1,7 @@
 package com.example.onemoreboard.dto;
 
+import com.example.onemoreboard.entity.Article;
+import com.example.onemoreboard.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,4 +29,13 @@ public class CommentRequest {
     private String nickname;
     private String content;
     private Instant createAt;
+
+    public Comment toEntity(Article article) {
+        return Comment.builder()
+                .article(article)
+                .nickname(this.nickname)
+                .content(this.content)
+                .createAt(Instant.now())
+                .build();
+    }
 }

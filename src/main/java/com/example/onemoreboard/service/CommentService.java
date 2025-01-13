@@ -1,7 +1,10 @@
 package com.example.onemoreboard.service;
 
 
+import com.example.onemoreboard.dto.CommentRequest;
 import com.example.onemoreboard.dto.CommentResponse;
+import com.example.onemoreboard.entity.Article;
+import com.example.onemoreboard.entity.Comment;
 import com.example.onemoreboard.repository.ArticleRepository;
 import com.example.onemoreboard.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +43,24 @@ public class CommentService {
                 .stream()
                 .map(comment -> CommentResponse.fromEntity(comment))
                 .collect(Collectors.toList());
+
+    }
+
+    public CommentResponse saveComment(Long articleId,CommentRequest commentRequest) {
+        /*
+        1. 게시글 조회 예외
+        2. 댓글 엔티티생성
+        3. 댓글 엔티티 DB 저장
+        4. Dto 변환해 반환
+         */
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(()-> new IllegalArgumentException("대상 게시글이 없습니다."));
+
+        Comment comment = Comment.createComment(commentRequest, article); // 엔티티 생성메서드사용 (엔티티가 자신의 생성을 책임지는 방식)
+        //Comment comment = commentRequest.toEntity(article); // 디티오-엔티티 변환사용
+        Comment saveComment = commentRepository.save(comment);
+
+        return CommentResponse.fromEntity(saveComment);
 
     }
 }

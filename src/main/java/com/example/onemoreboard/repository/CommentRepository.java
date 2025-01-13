@@ -24,6 +24,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     @Query(value = "SELECT * FROM board.comment WHERE nickname = :nickname", nativeQuery = true)
     List<Comment> findByNickname(@Param("nickname") String nickname);
+
 }
 
 
