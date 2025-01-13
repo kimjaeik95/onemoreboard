@@ -2,6 +2,7 @@ package com.example.onemoreboard.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,7 @@ import java.time.Instant;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(schema = "board", name = "comment")
 public class Comment {
     @Id

@@ -1,4 +1,4 @@
-package com.example.onemoreboard.restapi;
+package com.example.onemoreboard.restapicontroller;
 
 import com.example.onemoreboard.dto.ArticleRequest;
 import com.example.onemoreboard.dto.ArticleResponse;
