@@ -80,4 +80,10 @@ public class CommentService {
 
         return CommentResponse.fromEntity(comment);
     }
+
+    public void deleteByIdComment(Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("댓글을 찾을 수 없습니다."));
+        commentRepository.delete(comment);
+    }
 }

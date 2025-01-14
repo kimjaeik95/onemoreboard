@@ -49,4 +49,10 @@ public class CommentController {
         CommentResponse commentResponse = commentService.updateByIdComment(id, commentRequest);
         return ResponseEntity.ok().body(commentResponse);
     }
+
+    @DeleteMapping("/comments/{id}")
+    public ResponseEntity<?> deleteComment(@PathVariable("id") Long id) {
+        commentService.deleteByIdComment(id);
+        return ResponseEntity.noContent().build();
+    }
 }
