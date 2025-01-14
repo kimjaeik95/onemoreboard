@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 
 /**
@@ -51,6 +50,10 @@ public class Comment {
         this.nickname = nickname;
         this.content = content;
         this.createAt = Instant.now();
+    }
+
+    public void updateComment(String content) {
+        this.content = content;
     }
 
     // 생성자 방식

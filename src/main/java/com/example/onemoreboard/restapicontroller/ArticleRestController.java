@@ -29,7 +29,7 @@ public class ArticleRestController {
 
     @GetMapping("/articles")
     public List<Article> getArticles() {
-       return articleService.findArticles();
+        return articleService.findArticles();
     }
 
     @GetMapping("/articles/{id}")
@@ -43,15 +43,15 @@ public class ArticleRestController {
     }
 
     @PatchMapping("/articles/update/{id}")
-    public ResponseEntity<?> updateArticle(@PathVariable("id")Long id, @RequestBody ArticleRequest articleRequest) {
-         ArticleResponse articleResponse = articleService.restUpdateArticle(id, articleRequest);
-         return ResponseEntity.ok().body(articleResponse);
+    public ResponseEntity<?> updateArticle(@PathVariable("id") Long id, @RequestBody ArticleRequest articleRequest) {
+        ArticleResponse articleResponse = articleService.restUpdateArticle(id, articleRequest);
+        return ResponseEntity.ok().body(articleResponse);
     }
 
     @DeleteMapping("/articles/delete/{id}")
     public ResponseEntity<?> deleteArticle(@PathVariable("id") Long id) {
-         articleService.deleteArticleById(id);
-         return ResponseEntity.noContent().build();
+        articleService.deleteArticleById(id);
+        return ResponseEntity.noContent().build();
 
     }
 

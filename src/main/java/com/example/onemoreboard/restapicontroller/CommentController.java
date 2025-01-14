@@ -35,10 +35,18 @@ public class CommentController {
     }
 
     @PostMapping("/{articleId}/comments")
-    public ResponseEntity<?> createComment(@PathVariable("articleId")Long articleId,
+    public ResponseEntity<?> createComment(@PathVariable("articleId") Long articleId,
                                            @RequestBody CommentRequest commentRequest) {
 
         CommentResponse commentResponse = commentService.saveComment(articleId, commentRequest);
+        return ResponseEntity.ok().body(commentResponse);
+    }
+
+    @PatchMapping("/comments/{id}")
+    public ResponseEntity<?> updateComment(@PathVariable("id") Long id,
+                                           @RequestBody CommentRequest commentRequest) {
+
+        CommentResponse commentResponse = commentService.updateByIdComment(id, commentRequest);
         return ResponseEntity.ok().body(commentResponse);
     }
 }
