@@ -35,7 +35,7 @@ public class CommentResponse {
         return CommentResponse.builder()
                 .id(comment.getId())
                 .articleId(comment.getArticle().getId())
-                .nickname(comment.getContent())
+                .nickname(comment.getNickname())
                 .content(comment.getContent())
                 .createAt(comment.getCreateAt())
                 .build();

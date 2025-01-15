@@ -2,8 +2,10 @@ package com.example.onemoreboard.controller;
 
 import com.example.onemoreboard.dto.ArticleRequest;
 import com.example.onemoreboard.dto.ArticleResponse;
+import com.example.onemoreboard.dto.CommentResponse;
 import com.example.onemoreboard.entity.Article;
 import com.example.onemoreboard.service.ArticleService;
+import com.example.onemoreboard.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,7 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final CommentService commentService;
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("articleRequest", new ArticleRequest());
@@ -49,7 +52,9 @@ public class ArticleController {
     @GetMapping("/find/{id}")
     public String getArticle(@PathVariable("id") Long id, Model model) {
         Article article = articleService.findArticleById(id);
+        List<CommentResponse> commentResponseList = commentService.findComments(id);
         model.addAttribute("article", article);
+        model.addAttribute("comments", commentResponseList);
         return "articles/show";
     }
 
