@@ -1,23 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>commentNew</title>
-</head>
-<body>
-<div class="container mt-4">
-    <h3>댓글 작성</h3>
-    <!-- 댓글 작성 폼 -->
-    <div class="form-group">
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h3>댓글 작성</h3>
+      <!-- 댓글 작성 폼 -->
+      <div class="form-group">
         <label for="nickname">닉네임</label>
-        <input type="text" id="nickname" name="nickname" class="form-control" placeholder="닉네임을 입력하세요" required>
-    </div>
-    <div class="form-group">
+        <input
+          type="text"
+          id="nickname"
+          name="nickname"
+          class="form-control"
+          placeholder="닉네임을 입력하세요"
+          required
+        />
+      </div>
+      <div class="form-group">
         <label for="content">내용</label>
-        <textarea id="content" name="content" class="form-control" rows="3" placeholder="내용을 입력하세요" required></textarea>
+        <textarea
+          id="content"
+          name="content"
+          class="form-control"
+          rows="3"
+          placeholder="내용을 입력하세요"
+          required
+        ></textarea>
+      </div>
+      <input type="hidden" id="articleId" th:value="${article.id}" />
+      <button type="submit" class="btn btn-primary" id="comment-create-btn">
+        댓글 작성
+      </button>
+
+      <script>
+        const commentCreateBtn = document.querySelector("#comment-create-btn");
+        commentCreateBtn.addEventListener("click", function () {
+          const comment = {
+            // 새 댓글의 닉네임
+            nickname: document.querySelector("#nickname").value,
+            // 새 댓글의 본문
+            content: document.querySelector("#content").value,
+            // 부모 게시글의 id
+            articleId: document.querySelector("#articleId").value,
+          };
+          // fetch() - 비동기 통신을 위한 Api
+          const url = "/api/articles/" + comment.articleId + "/comments";
+          fetch(url, {
+            method: "POST", //Post 요청
+            headers: {
+              "Content-Type": "application/json", //전송 본문의 타입 JSON 설정
+            },
+            body: JSON.stringify(comment), // comment 자바객체 JSON 문자열로 변환
+          }).then((response) => {
+            // HTTP 응답 코드에 따른 메시지 출력
+            const msg = response.ok ? "댓글이 등록됐습니다." : "댓글 등록 실패";
+            alert(msg);
+            // 현재페이지 새로고침
+            window.location.reload();
+          });
+        });
+      </script>
     </div>
-    <button type="submit" class="btn btn-primary">댓글 작성</button>
-</div>
-</body>
+  </body>
 </html>

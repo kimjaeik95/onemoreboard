@@ -1,38 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
     <!-- 부트스트랩 CSS 포함 -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<!-- 부트스트랩 테이블 -->
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Title</th>
-        <th scope="col">Content</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td th:text="${article.id}"></td>
-        <td th:text="${article.title}"></td>
-        <td th:text="${article.content}"></td>
-    </tr>
-    <tbody>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 부트스트랩 테이블 -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${article.id}"></td>
+          <td th:text="${article.title}"></td>
+          <td th:text="${article.content}"></td>
+        </tr>
+      </tbody>
 
-    </tbody>
-</table>
-<a th:href="@{/api/articles/{id}/edit(id=${article.id})}" class="btn btn-primary">수정하기</a>
-<a th:href="@{/api/articles/{id}/delete(id=${article.id})}" class="btn btn-danger">삭제하기</a>
-<a href="/api/articles/finds" class="btn btn-warning">목록으로</a>
+      <tbody></tbody>
+    </table>
+    <a
+      th:href="@{/api/articles/{id}/edit(id=${article.id})}"
+      class="btn btn-primary"
+      >수정하기</a
+    >
+    <a
+      th:href="@{/api/articles/{id}/delete(id=${article.id})}"
+      class="btn btn-danger"
+      >삭제하기</a
+    >
+    <a href="/api/articles/finds" class="btn btn-warning">목록으로</a>
 
-<!-- 푸터 삽입 -->
-<div th:replace="~{comment/comments.html}"></div>
-
-
-</body>
+    <!-- 푸터 삽입 -->
+    <div th:replace="~{comment/comments.html}"></div>
+  </body>
 </html>
