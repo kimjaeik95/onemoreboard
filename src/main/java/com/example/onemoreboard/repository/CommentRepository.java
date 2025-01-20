@@ -20,7 +20,7 @@ import com.example.onemoreboard.entity.Comment;
  * 1/10/25       JAEIK       최초 생성
  */
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    @Query(value = "SELECT * FROM board.comment WHERE article_id = :articleId ORDER BY id ASC", nativeQuery = true)
+    @Query(value = "SELECT * FROM board.comment WHERE article_id = :articleId ORDER BY create_at ASC", nativeQuery = true)
     List<Comment> findByArticleId(@Param("articleId") Long articleId);
 
     @Query(value = "SELECT * FROM board.comment WHERE nickname = :nickname", nativeQuery = true)
